@@ -127,9 +127,26 @@
          cat ../conf/hosts
         ```
       1. Copy the first line, which looks like: `bigtop-hostname0.demo.local`
-      1. Paste it as `Base URL` of `redhat8`. click next
-      1. 
+      1. Paste `http://bigtop-hostname0.demo.local` (here we added `http://`) as `Base URL` of `redhat8`. click next to go to Install Options screen
+      1. We will back here after next step of installing agents
 
+1. **Install the Ambari agent on all nodes**
+
+   ```bash
+   ./install-ambari-agent.sh
+   ```
+   
+1. **Download private key from first node**
+      1. to show list of nodes:
+      ```bash
+      ../conf/hosts
+      ```
+      1. Copy the first line, which looks like: `bigtop-hostname0`
+      1. docker command:
+      ```bash
+      docker compose exec -it bigtop_hostname0
+      ```
+   
    * When prompted for the **base URL**, enter:
      `http://bigtop-hostname0.demo.local`
      *(Your OS should be based on Red Hat 8)*
@@ -142,9 +159,5 @@
      bigtop-hostname3.demo.local
      ```
 
-1. **Install the Ambari agent on all nodes**
 
-   ```bash
-   ./install-ambari-agent.sh
-   ```
 
