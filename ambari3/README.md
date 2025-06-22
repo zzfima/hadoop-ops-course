@@ -30,7 +30,7 @@
       user_name ALL=(ALL) ALL
       ```
 1. **Install VirtualBox Guest Additions**
-   If you want copy-paste and so on check [it](https://www.youtube.com/watch?v=NvaFdxk5-N4)
+   If you want copy-paste and so on check [it](https://www.youtube.com/watch?v=saiy4_XsLoA) 
    
 1. **Install Docker Engine (if not installed)**
    Refer to the official Docker documentation:
