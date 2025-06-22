@@ -114,11 +114,11 @@
       172.18.0.4 3f691fcc5028 3f691fcc5028
       
       ```
-   do next:
-      ```
-      docker compose down
-      docker compose up -d
-      ```
+      do next:
+         ```
+         docker compose down
+         docker compose up -d
+         ```
 1. **Run setup on each node**
 
    ```bash
