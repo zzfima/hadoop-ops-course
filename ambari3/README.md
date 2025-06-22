@@ -33,7 +33,7 @@
    If you want copy-paste and so on check [it](https://www.youtube.com/watch?v=saiy4_XsLoA) 
    
 1. **Install Docker Engine (if not installed)**
-   Refer to the official Docker documentation:
+   Refer to the official Docker documentation (personally i use Install using the apt repository):
    [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
 
 1. **Run Docker without `sudo` (optional)**
