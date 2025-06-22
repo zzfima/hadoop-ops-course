@@ -100,6 +100,8 @@
    ```bash
    cat ../conf/hosts
    ```
+
+   you can see 4 ip addresses and their names
    
 1. **Run setup on each node**
 
@@ -111,12 +113,6 @@
 
    ```bash
    ./install-ambari-server.sh
-   ```
-
-1. **Install the Ambari agent on all nodes**
-
-   ```bash
-   ./install-ambari-agent.sh
    ```
 
 1. **Access the Ambari Web UI**
@@ -136,3 +132,10 @@
      bigtop-hostname2.demo.local 
      bigtop-hostname3.demo.local
      ```
+
+1. **Install the Ambari agent on all nodes**
+
+   ```bash
+   ./install-ambari-agent.sh
+   ```
+
