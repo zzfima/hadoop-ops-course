@@ -115,11 +115,20 @@
    ./install-ambari-server.sh
    ```
 
-1. **Access the Ambari Web UI**
+1. **Cluster Configuration uses Ambari Web UI**
    Go to [http://localhost:8080](http://localhost:8080)
    *Default credentials: `admin` / `admin`*
 
-1. **Cluster Configuration**
+      1. Click `Launch Install Wizard`
+      1. Name it  `demo`. click next
+      1. Remove all repositories except `redhat8`
+      1. run:
+        ```bash
+         cat ../conf/hosts
+        ```
+      1. Copy the first line, which looks like: `bigtop-hostname0.demo.local`
+      1. Paste it as `Base URL` of `redhat8`. click next
+      1. 
 
    * When prompted for the **base URL**, enter:
      `http://bigtop-hostname0.demo.local`
