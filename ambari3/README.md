@@ -29,7 +29,9 @@
       ```bash
       user_name ALL=(ALL) ALL
       ```
-
+1. **Install VirtualBox Guest Additions**
+   If you want copy-paste and so on check [it](https://www.youtube.com/watch?v=NvaFdxk5-N4)
+   
 1. **Install Docker Engine (if not installed)**
    Refer to the official Docker documentation:
    [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
@@ -146,18 +148,28 @@
       ```bash
       docker compose exec -it bigtop_hostname0
       ```
-   
-   * When prompted for the **base URL**, enter:
-     `http://bigtop-hostname0.demo.local`
-     *(Your OS should be based on Red Hat 8)*
-   * When prompted for the **installation nodes**, enter:
+      1. check run dockers command:
+      ```bash
+      docker compose ps
+      ```
+      1. you can see first docker which we will login, , which looks like: `bigtop_hostname0`
+      1. login into bash shell of selected docker `bigtop_hostname0`:
+      ```bash
+      docker compose exec -it bigtop_hostname0 /bin/bash
+      ```
+      1. for view ssh key type:
+      ```bash
+      cat root/.ssh/id_rsa
+      ```
+      1. Copy whole key. Starts at `---BEGIN` and ends at `KEY---`
+      1. now back to Ambari Web UI
 
-     ```
-     bigtop-hostname0.demo.local 
-     bigtop-hostname1.demo.local 
-     bigtop-hostname2.demo.local 
-     bigtop-hostname3.demo.local
-     ```
+1. **Cluster Configuration uses Ambari Web UI**
+      1. You are at Install Options screen
+      1. Paste rsa key into host registration information table, like this `---BEGIN ....`
+      1. Paste all host names (4 of them) into target table, like this: `bigtop-hostname0.demo.local ... bigtop-hostname3.demo.local`
+      1. 
+
 
 
 
