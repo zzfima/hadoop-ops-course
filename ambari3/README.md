@@ -133,7 +133,7 @@
       1. We will back here after next step of installing agents
 
 1. **Install the Ambari agent on all nodes**
-
+!!! if it failed, run it again
    ```bash
    ./install-ambari-agent.sh
    ```
@@ -166,10 +166,7 @@
 
 1. **Cluster Configuration uses Ambari Web UI**
       1. You are at Install Options screen
-      1. Paste rsa key into host registration information table, like this `---BEGIN ....`
-      1. Paste all host names (4 of them) into target table, like this: `bigtop-hostname0.demo.local ... bigtop-hostname3.demo.local`
-      1. 
-
-
-
-
+      1. Paste rsa key into bottom host registration information table, like this `---BEGIN ....`
+      1. Paste all host names (4 of them, can be seen using `../conf/hosts`) into upper target table, like this: `bigtop-hostname0.demo.local ... bigtop-hostname3.demo.local`, each one in its own line.
+      1. Click register and confirm button.
+      2. 
