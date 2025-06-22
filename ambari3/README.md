@@ -103,8 +103,22 @@
    cat ../conf/hosts
    ```
 
-   you can see 4 ip addresses and their names
-   
+   you can see 4 ip addresses and their names.
+
+   * If you see it like:
+
+      ```
+      172.18.0.2 485ed8d105a0 485ed8d105a0
+      172.18.0.5 5f83cac62798 5f83cac62798
+      172.18.0.3 14d8b92d0a4a 14d8b92d0a4a
+      172.18.0.4 3f691fcc5028 3f691fcc5028
+      
+      ```
+   do next:
+      ```
+      docker compose down
+      docker compose up -d
+      ```
 1. **Run setup on each node**
 
    ```bash
