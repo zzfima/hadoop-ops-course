@@ -53,14 +53,14 @@
 
 1. **Clone this repository**
    Alternatively, download the ZIP file and unpack it.
-   Then change into the `ambari3` directory:
+   
+1. Change into the `ambari3` directory:
 
    ```bash
    cd ambari3
    ```
 
 1. **Start the containers**
-   Run the following command from the `ambari3/` directory:
 
    ```bash
    docker compose up -d
@@ -71,14 +71,20 @@
    ```bash
    docker compose ps
    ```
+
+1. Change into the `ambari3/scripts` directory:
+
+   ```bash
+   cd scripts
+   ```
    
 1. **Set up the Ambari repository**
-   Run the following command from the `scripts/` directory inside `ambari3/`.
    *Note: This step may take a while (the repository is approximately 7 GB).*
 
    ```bash
    ./setup-ambari-repo.sh
    ```
+   you can see its downloaded into directory `ambari3/ambari-repo`
 
 1. **Set up hostnames**
    This script correctly configures hostnames in the hosts file:
@@ -89,6 +95,12 @@
 
    *If you restart the containers and their IP addresses change, re-run this script to update the hosts file.*
 
+1. After setup hostname you can check it:
+
+   ```bash
+   cat ../conf/hosts
+   ```
+   
 1. **Run setup on each node**
 
    ```bash
