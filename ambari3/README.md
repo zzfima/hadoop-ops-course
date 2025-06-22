@@ -169,4 +169,4 @@
       1. Paste rsa key into bottom host registration information table, like this `---BEGIN ....`
       1. Paste all host names (4 of them, can be seen using `../conf/hosts`) into upper target table, like this: `bigtop-hostname0.demo.local ... bigtop-hostname3.demo.local`, each one in its own line.
       1. Click register and confirm button.
-      2. 
+      2. All 4 blue progress bar shall became green
