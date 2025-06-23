@@ -184,3 +184,77 @@
       1. Paste all host names (4 of them, can be seen using `../conf/hosts`) into upper target table, like this: `bigtop-hostname0.demo.local ... bigtop-hostname3.demo.local`, each one in its own line.
       1. Click register and confirm button.
       2. All 4 blue progress bar shall became green
+
+## Troubleshooters
+
+1. **Set admin password**  
+   Currently, you can only use the user credentials: maria_dev/maria_dev. To set admin credentials (admin/admin), do next:
+   ```bash
+   ssh root@localhost -p 2222
+   ```
+   Enter password `Hadoop`. Set a password (`1&tk7*ut`, for example). Run script:
+   ```bash
+   ambari-admin-password-reset
+   ```
+   set admin password (`admin`, for example)
+
+1. **HDFS cannot start**  
+   When starting HDFS in Ambari, you get the following log:
+   ```bash
+   2025-06-22 20:11:33,746 - Directory['/var/log/hadoop/hdfs'] {'owner': 'hdfs', 'group': 'hadoop', 'create_parents': True}
+   2025-06-22 20:11:33,746 - File['/var/run/hadoop/hdfs/hadoop-hdfs-namenode.pid'] {'action': ['delete'], 'not_if': 'ambari-sudo.sh  -H -E test -f /var/run/hadoop/hdfs/hadoop-hdfs-namenode.pid && ambari-sudo.sh  -H -E pgrep -F /var/run/hadoop/hdfs/hadoop-hdfs-namenode.pid'}
+   2025-06-22 20:11:33,755 - Execute['ambari-sudo.sh su hdfs -l -s /bin/bash -c 'ulimit -c unlimited ;  /usr/hdp/3.0.1.0-187/hadoop/bin/hdfs --config /usr/hdp/3.0.1.0-187/hadoop/conf --daemon start namenode''] {'environment': {'HADOOP_LIBEXEC_DIR': '/usr/hdp/3.0.1.0-187/hadoop/libexec'}, 'not_if': 'ambari-sudo.sh  -H -E test -f /var/run/hadoop/hdfs/hadoop-hdfs-namenode.pid && ambari-sudo.sh  -H -E pgrep -F /var/run/hadoop/hdfs/hadoop-hdfs-namenode.pid'}
+   2025-06-22 20:11:35,968 - Waiting for this NameNode to leave Safemode due to the following conditions: HA: False, isActive: True, upgradeType: None
+   2025-06-22 20:11:35,968 - Waiting up to 19 minutes for the NameNode to leave Safemode...
+   2025-06-22 20:11:35,968 - Execute['/usr/hdp/current/hadoop-hdfs-namenode/bin/hdfs dfsadmin -fs hdfs://sandbox-hdp.hortonworks.com:8020 -safemode get | grep 'Safe mode is OFF''] {'logoutput': True, 'tries': 115, 'user': 'hdfs', 'try_sleep': 10}
+   safemode: NameNode still not started
+   2025-06-22 20:11:39,507 - Retrying after 10 seconds. Reason: Execution of '/usr/hdp/current/hadoop-hdfs-namenode/bin/hdfs dfsadmin -fs hdfs://sandbox-hdp.hortonworks.com:8020 -safemode get | grep 'Safe mode is OFF'' returned 1. safemode: NameNode still not started
+   2025-06-22 20:11:51,698 - Retrying after 10 seconds. Reason: Execution of '/usr/hdp/current/hadoop-hdfs-namenode/bin/hdfs dfsadmin -fs hdfs://sandbox-hdp.hortonworks.com:8020 -safemode get | grep 'Safe mode is OFF'' returned 1. 
+   2025-06-22 20:12:04,105 - Retrying after 10 seconds. Reason: Execution of '/usr/hdp/current/hadoop-hdfs-namenode/bin/hdfs dfsadmin -fs hdfs://sandbox-hdp.hortonworks.com:8020 -safemode get | grep 'Safe mode is OFF'' returned 1.
+   ```
+   That means, Ambari log shows that the HDFS NameNode is stuck in Safe Mode, which is preventing it from starting properly. This is a common issue in the Hortonworks Sandbox or any single-node setup. Do next (ChatGPT solution):
+
+         1. SSH into the Sandbox         
+         ```bash
+         ssh root@localhost -p 2222
+         # Default password: hadoop
+         ```
+         
+         2. Manually Leave Safe Mode
+         
+         Switch to the `hdfs` user:
+         
+         ```bash
+         sudo su - hdfs
+         hdfs dfsadmin -safemode leave
+         ```
+         
+         Expected output:
+         
+         ```
+         Safe mode is OFF
+         ```
+
+         3. Check HDFS Health (Optional)
+         
+         ```bash
+         hdfs dfsadmin -report
+         ```
+         
+         Sample output:
+         
+         ```
+         Configured Capacity: ...
+         DFS Remaining: ...
+         Live datanodes (1):
+         ```
+         
+         4. Restart HDFS from Ambari
+         
+         Go to **Ambari Web UI**:
+         
+         * Navigate to **HDFS > Service Actions > Restart All**
+         * Or restart just the **NameNode** component
+         
+         Then restart services from Ambari.
+
